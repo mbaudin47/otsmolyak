@@ -18,6 +18,8 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+#include "otsmolpack/smolpack.hh"
 #include "otsmolyak/SmolyakExperiment.hxx"
 #include <openturns/PersistentObjectFactory.hxx>
 
@@ -29,32 +31,44 @@ namespace OTSMOLYAK
 CLASSNAMEINIT(SmolyakExperiment);
 
 /* Default constructor */
-SmolyakExperiment::SmolyakExperiment()
-  : TypedInterfaceObject<SmolyakImplementation>(new SmolyakImplementation)
+SmolyakExperiment::SmolyakExperiment():
+  WeightedExperimentImplementation()
 {
   // Nothing to do
 }
 
-
-SmolyakExperiment::SmolyakExperiment(const SmolyakImplementation & implementation)
-  : TypedInterfaceObject<SmolyakImplementation>(implementation.clone())
+/* Constructor with parameters */
+SmolyakExperiment::SmolyakExperiment(const UnsignedInteger size):
+  WeightedExperimentImplementation(size)
 {
   // Nothing to do
 }
 
-Point SmolyakExperiment::square(Point & p) const
+/* Constructor with parameters */
+SmolyakExperiment::SmolyakExperiment(const Distribution & distribution,
+    const UnsignedInteger size):
+  WeightedExperimentImplementation(distribution, size)
 {
-  return getImplementation()->square(p);
+  // Nothing to do
 }
+
 
 /* String converter */
 String SmolyakExperiment::__repr__() const
 {
   OSS oss;
-  oss << "class=" << SmolyakExperiment::GetClassName()
-      << " implementation=" << getImplementation()->__repr__();
+  oss << "class=" << GetClassName()
+      << " name=" << getName()
+      << " distribution=" << distribution_
+      << " size=" << size_;
   return oss;
 }
 
+/* Sample generation */
+Sample SmolyakExperiment::generateWithWeights(Point & weights) const
+{
+  weights = Point(size_, 1.0 / size_);
+  return distribution_.getSample(size_);
+}
 
 } /* namespace OTSMOLYAK */

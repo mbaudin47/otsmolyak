@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief SmolyakExperiment
+ *  @brief Abstract top-level view of an SmolyakExperiment
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -21,40 +21,47 @@
 #ifndef OTSMOLYAK_SMOLYAKEXPERIMENT_HXX
 #define OTSMOLYAK_SMOLYAKEXPERIMENT_HXX
 
-#include <openturns/TypedInterfaceObject.hxx>
-#include <openturns/StorageManager.hxx>
-#include <openturns/Point.hxx>
 #include "otsmolyak/OtSmolyakprivate.hxx"
+#include "openturns/WeightedExperimentImplementation.hxx"
 
 namespace OTSMOLYAK
 {
 
 /* forward declaration */
-class SmolyakImplementation;
+class SmolyakExperiment;
+
 
 /**
  * @class SmolyakExperiment
  *
- * SmolyakExperiment is some SmolyakExperiment type to illustrate how to add some classes in Open TURNS
+ * The class describes the probabilistic concept of SmolyakExperiment
  */
 class OTSMOLYAK_API SmolyakExperiment
-  : public OT::TypedInterfaceObject<SmolyakImplementation>
+  : public OT::WeightedExperimentImplementation
 {
   CLASSNAME;
-
 public:
+
 
   /** Default constructor */
   SmolyakExperiment();
 
-  /** Constructor from implementation */
-  SmolyakExperiment(const SmolyakImplementation & implementation);
+  /** Parameters constructor */
+  explicit SmolyakExperiment(const UnsignedInteger size);
 
-  /** a func that return a point squared. **/
-  OT::Point square(OT::Point & p) const;
+  /** Parameters constructor */
+  SmolyakExperiment(const Distribution & distribution,
+                       const UnsignedInteger size);
 
   /** String converter */
   OT::String __repr__() const;
+
+  /* Here is the interface that all derived class must implement */
+
+  /** Sample generation */
+  Sample generateWithWeights(Point & weightsOut) const;
+
+protected:
 
 private:
 

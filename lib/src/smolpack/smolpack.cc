@@ -1,7 +1,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# include "smolpack.hh"
+# include "otsmolpack/smolpack.hh"
 
 # define uniw 32     /* total # of nodes of quadrature formulae       */
 # define fn 6        /* # of different basic formulas                  */ 
