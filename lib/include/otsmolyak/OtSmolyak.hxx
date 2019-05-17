@@ -22,7 +22,6 @@
 #ifndef OTSMOLYAK_OTSMOLYAK_HXX
 #define OTSMOLYAK_OTSMOLYAK_HXX
 
-#include "otsmolyak/SmolyakImplementation.hxx"
 #include "otsmolyak/Smolyak.hxx"
 
 #endif // OTSMOLYAK_OTSMOLYAK_HXX

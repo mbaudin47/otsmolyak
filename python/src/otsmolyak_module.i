@@ -18,7 +18,6 @@
 
 // The new classes
 %include otsmolyak/OtSmolyakprivate.hxx
-%include SmolyakImplementation.i
 %include Smolyak.i
 
 

@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief SmolyakImplementation
+ *  @brief SmolyakExperiment
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -18,10 +18,10 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef OTSMOLYAK_SMOLYAKIMPLEMENTATION_HXX
-#define OTSMOLYAK_SMOLYAKIMPLEMENTATION_HXX
+#ifndef OTSMOLYAK_SMOLYAKEXPERIMENT_HXX
+#define OTSMOLYAK_SMOLYAKEXPERIMENT_HXX
 
-#include <openturns/PersistentObject.hxx>
+#include <openturns/TypedInterfaceObject.hxx>
 #include <openturns/StorageManager.hxx>
 #include <openturns/Point.hxx>
 #include "otsmolyak/OtSmolyakprivate.hxx"
@@ -29,39 +29,37 @@
 namespace OTSMOLYAK
 {
 
+/* forward declaration */
+class SmolyakImplementation;
+
 /**
- * @class SmolyakImplementation
+ * @class SmolyakExperiment
  *
- * SmolyakImplementation is some smolyak type to illustrate how to add some classes in OpenTURNS
+ * SmolyakExperiment is some SmolyakExperiment type to illustrate how to add some classes in Open TURNS
  */
-class OTSMOLYAK_API SmolyakImplementation
-  : public OT::PersistentObject
+class OTSMOLYAK_API SmolyakExperiment
+  : public OT::TypedInterfaceObject<SmolyakImplementation>
 {
   CLASSNAME;
 
 public:
+
   /** Default constructor */
-  SmolyakImplementation();
+  SmolyakExperiment();
 
-  /** Virtual constructor method */
-  SmolyakImplementation * clone() const;
+  /** Constructor from implementation */
+  SmolyakExperiment(const SmolyakImplementation & implementation);
 
-  /** example of a func that return a point squared. **/
-  OT::Point square(OT::Point& p) const;
+  /** a func that return a point squared. **/
+  OT::Point square(OT::Point & p) const;
 
   /** String converter */
   OT::String __repr__() const;
 
-  /** Method save() stores the object through the StorageManager */
-  virtual void save(OT::Advocate & adv) const;
-
-  /** Method load() reloads the object from the StorageManager */
-  virtual void load(OT::Advocate & adv);
-
 private:
 
-}; /* class SmolyakImplementation */
+}; /* class SmolyakExperiment */
 
 } /* namespace OTSMOLYAK */
 
-#endif /* OTSMOLYAK_SMOLYAKIMPLEMENTATION_HXX */
+#endif /* OTSMOLYAK_SMOLYAKEXPERIMENT_HXX */

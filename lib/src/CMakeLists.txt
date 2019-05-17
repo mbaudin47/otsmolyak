@@ -3,12 +3,9 @@
 ot_add_current_dir_to_include_dirs ()
 
 ot_add_source_file ( smolpack.cc )
-ot_add_source_file ( Smolyak.cxx )
-ot_add_source_file ( SmolyakImplementation.cxx )
+ot_add_source_file ( SmolyakExperiment.cxx )
 
-ot_install_header_file ( Smolyak.hxx )
-ot_install_header_file ( SmolyakImplementation.hxx )
-
+ot_install_header_file ( SmolyakExperiment.hxx )
 
 include_directories (${INTERNAL_INCLUDE_DIRS})
 

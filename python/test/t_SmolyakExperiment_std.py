@@ -4,7 +4,7 @@ from __future__ import print_function
 import openturns as ot
 import otsmolyak
 
-a = otsmolyak.Smolyak()
+a = otsmolyak.SmolyakExperiment()
 print(a)
 
 p = ot.Point([2, 3])
