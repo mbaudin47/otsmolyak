@@ -69,7 +69,7 @@ macro ( ot_pyinstallcheck_test TESTNAME )
           )
 endmacro ( ot_pyinstallcheck_test )
 
-ot_pyinstallcheck_test (SmolyakExperiment_std)
+ot_pyinstallcheck_test (Smolyak_std)
 ot_pyinstallcheck_test (docstring)
 
 add_custom_target ( pyinstallcheck COMMAND ${CMAKE_CTEST_COMMAND} -R "^pyinstallcheck_"

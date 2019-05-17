@@ -19,7 +19,7 @@
  *
  */
 
-#include "otsmolpack/smolpack.hh"
+#include "otsmolyak/smolpack.hh"
 #include "otsmolyak/Smolyak.hxx"
 #include <openturns/PersistentObjectFactory.hxx>
 
