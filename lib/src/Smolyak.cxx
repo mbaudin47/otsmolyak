@@ -79,9 +79,33 @@ Smolyak * Smolyak::clone() const
 Point Smolyak::integrate(const Function & function,
                          const Interval & interval) const
 {
+  const UnsignedInteger inputDimension = function.getInputDimension();
   const UnsignedInteger outputDimension = function.getOutputDimension();
+  const UnsignedInteger print_stats = 0; // Do not print outputs
   Point result(outputDimension);
+  result[0] = OTSMOLPACK::int_smolyak(inputDimension, cubatureParameter_, Smolyak::ComputeFunction, print_stats, (void*) function)
   return result;
+}
+
+/** Wrapper of the Function operator() compatible with
+* smolyak signature, 
+* adapted from openturns/lib/src/Base/Optim/Cobyla.cxx
+*/
+double Smolyak::ComputeFunction(int inputDimension,
+                                double *x,
+                                void *state)
+{
+  /* Convert the input vector in OpenTURNS format */
+  Point inPoint(inputDimension);
+  memcpy(&inPoint[0], x, inputDimension * sizeof(Scalar));
+
+  /* Evaluate the function */
+  Function *function = static_cast<Function *>(state);
+  Point outPoint(function->operator()(inPoint));
+  
+  double returnValue = outPoint[0];
+
+  return returnValue;
 }
 
 } /* namespace OTSMOLYAK */

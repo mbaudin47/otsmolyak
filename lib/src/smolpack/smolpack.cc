@@ -48,7 +48,8 @@ struct tnode {
 
 struct tnode *root;
  
-double (*f) (int, double x[]);
+double (*f) (int, double *x, void *state);
+void *function_state;
 void formula (int,int);
 double eval (int);                     /* sub-formula calculator      */
 double fsum (int);                     /* sum(f(+-x_nu))      */
@@ -64,8 +65,8 @@ void frei ( struct tnode *p );
  
 /******************************************************************************/
 
-double int_smolyak ( int dim, int qq, double (*ff) ( int, double xx[] ),
-  int print_stats )
+double int_smolyak ( int dim, int qq, double (*ff) ( int, double *xx, void *state),
+  int print_stats, void *state )
 
 /******************************************************************************/
 /*
@@ -96,7 +97,7 @@ double int_smolyak ( int dim, int qq, double (*ff) ( int, double xx[] ),
     Input, int QQ, ?
     QQ - DIM < 48
 
-    Input, double ( *FF ) ( int D, double X[] ), the function to be integrated.
+    Input, double ( *FF ) ( int D, double * X ), the function to be integrated.
 
     Input, int PRINT_STATS, is nonzero if this routine should print out 
     statistics for the number of function calls and weight computations.
@@ -110,6 +111,7 @@ double int_smolyak ( int dim, int qq, double (*ff) ( int, double xx[] ),
   d = dim;
   q = qq;
   f = ff;
+  function_state = state;
 /* 
   Initialize.
 */
@@ -770,7 +772,7 @@ double fsum ( int k )
   }
   else if ( k == d + 1 )
   {
-    ftotal = ftotal + (*f) ( d, x );
+    ftotal = ftotal + (*f) ( d, x, function_state );
   }
   else
   {

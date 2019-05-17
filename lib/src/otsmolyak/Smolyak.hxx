@@ -74,6 +74,13 @@ protected:
 
 private:
 
+  /**
+   * Evaluate function.
+   */
+  static double ComputeFunction(int inputDimension,
+                                double *x,
+                                void *state);
+
   /* Local integration rule */
   OT::UnsignedInteger cubatureParameter_;
 
