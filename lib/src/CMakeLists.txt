@@ -2,6 +2,7 @@
 
 ot_add_current_dir_to_include_dirs ()
 
+ot_add_source_file ( smolpack.cc )
 ot_add_source_file ( Smolyak.cxx )
 ot_add_source_file ( SmolyakImplementation.cxx )
 
