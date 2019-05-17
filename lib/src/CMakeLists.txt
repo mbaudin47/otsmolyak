@@ -4,9 +4,9 @@ endif ()
 
 ot_add_current_dir_to_include_dirs ()
 
-ot_add_source_file ( SmolyakExperiment.cxx )
+ot_add_source_file ( Smolyak.cxx )
 
-ot_install_header_file ( SmolyakExperiment.hxx )
+ot_install_header_file ( Smolyak.hxx )
 
 include_directories (${INTERNAL_INCLUDE_DIRS})
 

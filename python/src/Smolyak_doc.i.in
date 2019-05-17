@@ -1,0 +1,5 @@
+// Smolyak docstrings are defined in Smolyak_doc.i.in
+
+%feature("docstring") OTSMOLYAK::Smolyak
+OTSMOLYAK_Smolyak_doc
+

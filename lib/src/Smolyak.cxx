@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief SmolyakExperiment
+ *  @brief Smolyak
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -20,7 +20,7 @@
  */
 
 #include "otsmolpack/smolpack.hh"
-#include "otsmolyak/SmolyakExperiment.hxx"
+#include "otsmolyak/Smolyak.hxx"
 #include <openturns/PersistentObjectFactory.hxx>
 
 using namespace OT;
@@ -28,47 +28,60 @@ using namespace OT;
 namespace OTSMOLYAK
 {
 
-CLASSNAMEINIT(SmolyakExperiment);
+CLASSNAMEINIT(Smolyak);
 
 /* Default constructor */
-SmolyakExperiment::SmolyakExperiment():
-  WeightedExperimentImplementation()
+Smolyak::Smolyak():
+  IntegrationAlgorithmImplementation()
+  , cubatureParameter_(0)
 {
   // Nothing to do
 }
 
 /* Constructor with parameters */
-SmolyakExperiment::SmolyakExperiment(const UnsignedInteger size):
-  WeightedExperimentImplementation(size)
+Smolyak::Smolyak(const UnsignedInteger cubatureParameter):
+  IntegrationAlgorithmImplementation()
+  , cubatureParameter_(cubatureParameter)
 {
   // Nothing to do
 }
-
-/* Constructor with parameters */
-SmolyakExperiment::SmolyakExperiment(const Distribution & distribution,
-    const UnsignedInteger size):
-  WeightedExperimentImplementation(distribution, size)
-{
-  // Nothing to do
-}
-
 
 /* String converter */
-String SmolyakExperiment::__repr__() const
+String Smolyak::__repr__() const
 {
   OSS oss;
   oss << "class=" << GetClassName()
       << " name=" << getName()
-      << " distribution=" << distribution_
-      << " size=" << size_;
+      << " cubatureParameter=" << cubatureParameter_;
   return oss;
 }
 
-/* Sample generation */
-Sample SmolyakExperiment::generateWithWeights(Point & weights) const
+/* String converter */
+String Smolyak::__str__(const String & offset) const
 {
-  weights = Point(size_, 1.0 / size_);
-  return distribution_.getSample(size_);
+  OSS oss(false);
+  oss << Smolyak::GetClassName()
+      << "(cubatureParameter=" << cubatureParameter_
+      << ")";
+  return oss;
+}
+
+
+/* Virtual constructor */
+Smolyak * Smolyak::clone() const
+{
+  return new Smolyak(*this);
+}
+
+/** Compute an approximation of \int_{[a,b]}f(x)dx, where [a,b]
+* is an n-D interval
+*/
+Point Smolyak::integrate(const Function & function,
+                         const Interval & interval) const
+{
+  const UnsignedInteger outputDimension = function.getOutputDimension();
+  Point result(outputDimension);
+  return result;
 }
 
 } /* namespace OTSMOLYAK */

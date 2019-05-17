@@ -1,7 +1,0 @@
-// Smolyak docstrings are defined in SmolyakExperiment_doc.i.in
-
-%feature("docstring") OTSMOLYAK::SmolyakExperiment
-OTSMOLYAK_SmolyakExperiment_doc
-%feature("docstring") OTSMOLYAK::SmolyakExperiment::square
-OTSMOLYAK_SmolyakExperiment_square_doc
-

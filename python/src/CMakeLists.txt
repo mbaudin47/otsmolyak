@@ -84,7 +84,6 @@ endmacro ()
 
 ot_add_python_module( ${PACKAGE_NAME} ${PACKAGE_NAME}_module.i 
                       Smolyak.i Smolyak_doc.i.in
-                      SmolyakImplementation.i SmolyakImplementation_doc.i.in
                     )
 
 
