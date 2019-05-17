@@ -1,0 +1,46 @@
+#                                               -*- cmake -*-
+#
+#  OtSmolyakConfig.cmake(.in)
+#
+#  Find OtSmolyak includes and libraries
+#
+#  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
+#
+
+# Use the following variables to compile and link against OtSmolyak:
+#  OTSMOLYAK_FOUND          - True if OtSmolyak was found on your system
+#  OTSMOLYAK_USE_FILE       - The file making OtSmolyak usable
+#  OTSMOLYAK_DEFINITIONS    - Definitions needed to build with OtSmolyak
+#  OTSMOLYAK_INCLUDE_DIRS   - List of directories where OtSmolyak' header file are
+#  OTSMOLYAK_LIBRARY        - Library name
+#  OTSMOLYAK_LIBRARIES      - List of libraries to link against
+#  OTSMOLYAK_LIBRARY_DIRS   - List of directories containing OtSmolyak' libraries
+#  OTSMOLYAK_ROOT_DIR       - The base directory of OtSmolyak
+#  OTSMOLYAK_VERSION_STRING - A human-readable string containing the version
+#  OTSMOLYAK_VERSION_MAJOR  - The major version of OtSmolyak
+#  OTSMOLYAK_VERSION_MINOR  - The minor version of OtSmolyak
+#  OTSMOLYAK_VERSION_PATCH  - The patch version of OtSmolyak
+
+@PACKAGE_INIT@
+
+set ( OTSMOLYAK_FOUND 1 )
+set ( OTSMOLYAK_USE_FILE     "@PACKAGE_OTSMOLYAK_USE_FILE@" )
+
+set ( OTSMOLYAK_DEFINITIONS  "@OTSMOLYAK_DEFINITIONS@" )
+set_and_check (OTSMOLYAK_INCLUDE_DIR  "@PACKAGE_OTSMOLYAK_INCLUDE_DIR@")
+set ( OTSMOLYAK_INCLUDE_DIRS "@PACKAGE_OTSMOLYAK_INCLUDE_DIRS@" )
+set_and_check (OTSMOLYAK_LIBRARY      "@OTSMOLYAK_LIBRARY@")
+set ( OTSMOLYAK_LIBRARIES    "@PACKAGE_OTSMOLYAK_LIBRARIES@" )
+set ( OTSMOLYAK_LIBRARY_DIRS "@PACKAGE_OTSMOLYAK_LIBRARY_DIRS@" )
+set_and_check (OTSMOLYAK_ROOT_DIR     "@PACKAGE_OTSMOLYAK_ROOT_DIR@")
+
+set ( OTSMOLYAK_VERSION_STRING "@OTSMOLYAK_VERSION_STRING@" )
+set ( OTSMOLYAK_VERSION_MAJOR  "@OTSMOLYAK_VERSION_MAJOR@" )
+set ( OTSMOLYAK_VERSION_MINOR  "@OTSMOLYAK_VERSION_MINOR@" )
+set ( OTSMOLYAK_VERSION_PATCH  "@OTSMOLYAK_VERSION_PATCH@" )
+
+set (OTSMOLYAK_SWIG_INCLUDE_DIRS "@PACKAGE_OTSMOLYAK_SWIG_INCLUDE_DIRS@")
+set (OTSMOLYAK_PYTHON@PYTHON_VERSION_MAJOR@_MODULE_PATH "@PACKAGE_PYTHON_MODULE_PATH@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include (${CMAKE_CURRENT_LIST_DIR}/OtSmolyak-Targets.cmake)

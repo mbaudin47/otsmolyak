@@ -2,9 +2,9 @@
 
 from __future__ import print_function
 import openturns as ot
-import ottemplate
+import otsmolyak
 
-a = ottemplate.MyClass()
+a = otsmolyak.Smolyak()
 print(a)
 
 p = ot.Point([2, 3])

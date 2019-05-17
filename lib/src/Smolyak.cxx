@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief MyClass
+ *  @brief Smolyak
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -18,44 +18,44 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include "ottemplate/MyClass.hxx"
-#include "ottemplate/MyClassImplementation.hxx"
+#include "otsmolyak/Smolyak.hxx"
+#include "otsmolyak/SmolyakImplementation.hxx"
 #include <openturns/PersistentObjectFactory.hxx>
 
 using namespace OT;
 
-namespace OTTEMPLATE
+namespace OTSMOLYAK
 {
 
-CLASSNAMEINIT(MyClass);
+CLASSNAMEINIT(Smolyak);
 
 /* Default constructor */
-MyClass::MyClass()
-  : TypedInterfaceObject<MyClassImplementation>(new MyClassImplementation)
+Smolyak::Smolyak()
+  : TypedInterfaceObject<SmolyakImplementation>(new SmolyakImplementation)
 {
   // Nothing to do
 }
 
 
-MyClass::MyClass(const MyClassImplementation & implementation)
-  : TypedInterfaceObject<MyClassImplementation>(implementation.clone())
+Smolyak::Smolyak(const SmolyakImplementation & implementation)
+  : TypedInterfaceObject<SmolyakImplementation>(implementation.clone())
 {
   // Nothing to do
 }
 
-Point MyClass::square(Point & p) const
+Point Smolyak::square(Point & p) const
 {
   return getImplementation()->square(p);
 }
 
 /* String converter */
-String MyClass::__repr__() const
+String Smolyak::__repr__() const
 {
   OSS oss;
-  oss << "class=" << MyClass::GetClassName()
+  oss << "class=" << Smolyak::GetClassName()
       << " implementation=" << getImplementation()->__repr__();
   return oss;
 }
 
 
-} /* namespace OTTEMPLATE */
+} /* namespace OTSMOLYAK */

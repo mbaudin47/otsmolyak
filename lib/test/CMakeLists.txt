@@ -18,7 +18,7 @@ macro ( ot_check_test TESTNAME )
   set ( TESTNAME_SRCS ${TESTNAME_SRC} )
   add_executable ( ${TESTNAME_TGT} EXCLUDE_FROM_ALL ${TESTNAME_SRCS} )
   add_dependencies ( tests ${TESTNAME_TGT} )
-  target_link_libraries ( ${TESTNAME_TGT} ottemplate )
+  target_link_libraries ( ${TESTNAME_TGT} otsmolyak )
   if (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4)
     target_link_libraries (${TESTNAME_TGT} CRT_fp8)
   endif ()
@@ -68,7 +68,7 @@ macro ( ot_check_test TESTNAME )
   set_tests_properties ( cppcheck_${TESTNAME} PROPERTIES ENVIRONMENT "${CHECK_ENVIRONMENT}" )
   list ( APPEND CHECK_TO_BE_RUN ${TESTNAME_TGT} )
   install ( FILES ${TESTNAME_SRC}
-            DESTINATION ${OTTEMPLATE_EXAMPLE_PATH} 
+            DESTINATION ${OTSMOLYAK_EXAMPLE_PATH} 
           )
 endmacro ()
 
@@ -76,7 +76,7 @@ include_directories ( ${INTERNAL_INCLUDE_DIRS} )
 
 
 
-ot_check_test ( MyClass_std )
+ot_check_test ( Smolyak_std )
 
 
 add_custom_target ( cppcheck COMMAND ${CMAKE_CTEST_COMMAND} -R "^cppcheck_"

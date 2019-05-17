@@ -1,8 +1,8 @@
 #                                               -*- cmake -*-
 #
-#  UseOTTemplate.cmake
+#  UseOtSmolyak.cmake
 #
-#  Use OTTemplate in CMake files
+#  Use OtSmolyak in CMake files
 #
 #  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
 #
@@ -21,7 +21,7 @@
 #
 #
 
-add_definitions     ( ${OTTEMPLATE_DEFINITIONS} )
-include_directories ( ${OTTEMPLATE_INCLUDE_DIRS} )
-link_directories    ( ${OTTEMPLATE_LIBRARY_DIRS} )
+add_definitions     ( ${OTSMOLYAK_DEFINITIONS} )
+include_directories ( ${OTSMOLYAK_INCLUDE_DIRS} )
+link_directories    ( ${OTSMOLYAK_LIBRARY_DIRS} )
 

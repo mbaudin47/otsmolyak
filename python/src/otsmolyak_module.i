@@ -1,6 +1,6 @@
-// SWIG file ottemplate_module.i
+// SWIG file otsmolyak_module.i
 
-%module(docstring="ottemplate module") ottemplate
+%module(docstring="otsmolyak module") otsmolyak
 
 %{
 #include <openturns/OT.hxx>
@@ -17,8 +17,8 @@
 %import uncertainty_module.i
 
 // The new classes
-%include ottemplate/OTTemplateprivate.hxx
-%include MyClassImplementation.i
-%include MyClass.i
+%include otsmolyak/OtSmolyakprivate.hxx
+%include SmolyakImplementation.i
+%include Smolyak.i
 
 

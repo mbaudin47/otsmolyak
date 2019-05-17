@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# OTTemplate documentation build configuration file, created by
+# OtSmolyak documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun 19 15:57:39 2015.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -20,7 +20,7 @@ import subprocess
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('sphinxext'))
-sys.path.insert(0, '@OTTEMPLATE_PYTHON_BUILD_MODULE_PATH@')
+sys.path.insert(0, '@OTSMOLYAK_PYTHON_BUILD_MODULE_PATH@')
 sys.path.insert(0, '@OPENTURNS_PYTHON_MODULE_PATH@')
 
 # -- General configuration -----------------------------------------------------
@@ -94,7 +94,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'OTTemplate'
+project = u'OtSmolyak'
 copyright = u'2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -220,7 +220,7 @@ html_last_updated_fmt = '%b %d, %Y'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'OTTemplatedoc'
+htmlhelp_basename = 'OtSmolyakdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -239,7 +239,7 @@ latex_additional_files = ['math_notations.sty']
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'OTTemplate.tex', u'OTTemplate Documentation',
+  ('index', 'OtSmolyak.tex', u'OtSmolyak Documentation',
    u'Airbus-EDF-IMACS-Phimeca', 'manual'),
 ]
 
@@ -269,7 +269,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ottemplate', u'OTTemplate Documentation',
+    ('index', 'otsmolyak', u'OtSmolyak Documentation',
      [u'Airbus-EDF-IMACS-Phimeca'], 1)
 ]
 
@@ -283,8 +283,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'OTTemplate', u'OTTemplate Documentation',
-   u'Airbus-EDF-IMACS-Phimeca', 'OTTemplate', 'One line description of project.',
+  ('index', 'OtSmolyak', u'OtSmolyak Documentation',
+   u'Airbus-EDF-IMACS-Phimeca', 'OtSmolyak', 'One line description of project.',
    'Miscellaneous'),
 ]
 

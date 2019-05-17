@@ -58,7 +58,7 @@ macro ( ot_add_python_module MODULENAME SOURCEFILE )
     set (module_target ${MODULENAME}_python)
   endif ()
 
-  swig_link_libraries (${MODULENAME}_python ottemplate)
+  swig_link_libraries (${MODULENAME}_python otsmolyak)
 
   target_link_libraries_with_dynamic_lookup (${module_target} ${PYTHON_LIBRARIES})
 
@@ -73,27 +73,27 @@ macro ( ot_add_python_module MODULENAME SOURCEFILE )
   endif ()
 
   install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULENAME}.py
-           DESTINATION ${OTTEMPLATE_PYTHON_MODULE_PATH}/${PACKAGE_NAME})
+           DESTINATION ${OTSMOLYAK_PYTHON_MODULE_PATH}/${PACKAGE_NAME})
   install (TARGETS ${module_target}
-            LIBRARY DESTINATION ${OTTEMPLATE_PYTHON_MODULE_PATH}/${PACKAGE_NAME})
+            LIBRARY DESTINATION ${OTSMOLYAK_PYTHON_MODULE_PATH}/${PACKAGE_NAME})
 
-  list (APPEND OTTEMPLATE_PYTHON_MODULES ${MODULENAME})
+  list (APPEND OTSMOLYAK_PYTHON_MODULES ${MODULENAME})
 endmacro ()
 
 
 
 ot_add_python_module( ${PACKAGE_NAME} ${PACKAGE_NAME}_module.i 
-                      MyClass.i MyClass_doc.i.in
-                      MyClassImplementation.i MyClassImplementation_doc.i.in
+                      Smolyak.i Smolyak_doc.i.in
+                      SmolyakImplementation.i SmolyakImplementation_doc.i.in
                     )
 
 
 install ( FILES __init__.py
-          DESTINATION ${OTTEMPLATE_PYTHON_MODULE_PATH}/${PACKAGE_NAME}
+          DESTINATION ${OTSMOLYAK_PYTHON_MODULE_PATH}/${PACKAGE_NAME}
         )
 
 install ( FILES ${SWIGFILES}
-          DESTINATION ${OTTEMPLATE_SWIG_INCLUDE_DIRS}
+          DESTINATION ${OTSMOLYAK_SWIG_INCLUDE_DIRS}
         )
 
 
@@ -102,15 +102,15 @@ install ( FILES ${SWIGFILES}
 if (SPHINX_FOUND)
 
   # create a build site-package from which sphinx can import
-  set (OTTEMPLATE_PYTHON_BUILD_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR}/site-packages)
-  execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${OTTEMPLATE_PYTHON_BUILD_MODULE_PATH}/ottemplate)
-  foreach (module ${OTTEMPLATE_PYTHON_MODULES})
-    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/${module}.py ${OTTEMPLATE_PYTHON_BUILD_MODULE_PATH}/ottemplate/${module}.py)
+  set (OTSMOLYAK_PYTHON_BUILD_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR}/site-packages)
+  execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${OTSMOLYAK_PYTHON_BUILD_MODULE_PATH}/otsmolyak)
+  foreach (module ${OTSMOLYAK_PYTHON_MODULES})
+    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/${module}.py ${OTSMOLYAK_PYTHON_BUILD_MODULE_PATH}/otsmolyak/${module}.py)
     # FIXME: get_target_property (suffix ${SWIG_MODULE_${module}_REAL_NAME} SUFFIX)
-    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/_${module}.so ${OTTEMPLATE_PYTHON_BUILD_MODULE_PATH}/ottemplate/_${module}.so)
+    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/_${module}.so ${OTSMOLYAK_PYTHON_BUILD_MODULE_PATH}/otsmolyak/_${module}.so)
   endforeach ()
   foreach (file __init__.py)
-    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${file} ${OTTEMPLATE_PYTHON_BUILD_MODULE_PATH}/ottemplate/${file})
+    execute_process (COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${file} ${OTSMOLYAK_PYTHON_BUILD_MODULE_PATH}/otsmolyak/${file})
   endforeach ()
 
   # sphinx configuration
@@ -180,7 +180,7 @@ if (SPHINX_FOUND)
                                   ${SPHINX_BINARY_DIR}/${format}
                         DEPENDS ${sphinx_clones}
                       )
-    foreach (MODULENAME ${OTTEMPLATE_PYTHON_MODULES})
+    foreach (MODULENAME ${OTSMOLYAK_PYTHON_MODULES})
       if (CMAKE_VERSION VERSION_LESS 3.13)
         set (module_target ${SWIG_MODULE_${MODULENAME}_python_REAL_NAME})
       else ()
@@ -200,12 +200,12 @@ if (SPHINX_FOUND)
   add_custom_target (sphinx_pdf DEPENDS ${SPHINX_BINARY_DIR}/latex/OpenTURNS.pdf)
   add_dependencies (sphinx_pdf sphinx_latex)
 
-  install (DIRECTORY ${SPHINX_BINARY_DIR}/html DESTINATION ${OTTEMPLATE_DOC_PATH})
+  install (DIRECTORY ${SPHINX_BINARY_DIR}/html DESTINATION ${OTSMOLYAK_DOC_PATH})
 endif ()
 
 # wheel files
 configure_file (METADATA.in METADATA @ONLY)
 configure_file (WHEEL.in WHEEL @ONLY)
-install (DIRECTORY DESTINATION ${OTTEMPLATE_PYTHON_MODULE_PATH}/${PACKAGE_NAME}-${PACKAGE_VERSION}.dist-info)
+install (DIRECTORY DESTINATION ${OTSMOLYAK_PYTHON_MODULE_PATH}/${PACKAGE_NAME}-${PACKAGE_VERSION}.dist-info)
 install (FILES ${CMAKE_CURRENT_BINARY_DIR}/METADATA ${CMAKE_CURRENT_BINARY_DIR}/WHEEL
-	 DESTINATION ${OTTEMPLATE_PYTHON_MODULE_PATH}/${PACKAGE_NAME}-${PACKAGE_VERSION}.dist-info)
+	 DESTINATION ${OTSMOLYAK_PYTHON_MODULE_PATH}/${PACKAGE_NAME}-${PACKAGE_VERSION}.dist-info)

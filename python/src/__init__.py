@@ -1,10 +1,10 @@
 """
-    ottemplate --- An OpenTURNS module
+    otsmolyak --- An OpenTURNS module
     ==================================
 
     Contents
     --------
-      'ottemplate' is a module for OpenTURNS
+      'otsmolyak' is a module for OpenTURNS
 
 """
 
@@ -13,7 +13,7 @@ if sys.platform.startswith('win'):
     # this ensures OT dll is loaded
     import openturns
 
-from .ottemplate import *
+from .otsmolyak import *
 
 __version__ = '0.0'
 

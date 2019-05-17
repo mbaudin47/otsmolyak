@@ -64,12 +64,12 @@ macro ( ot_pyinstallcheck_test TESTNAME )
   set_tests_properties ( pyinstallcheck_${TESTNAME} PROPERTIES ENVIRONMENT "${PYINSTALLCHECK_ENVIRONMENT}" )
   list ( APPEND PYINSTALLCHECK_TO_BE_RUN ${TESTNAME_SRC} )
   install ( FILES ${TESTNAME_SRC}
-            DESTINATION ${OTTEMPLATE_EXAMPLE_PATH} 
+            DESTINATION ${OTSMOLYAK_EXAMPLE_PATH} 
             PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
           )
 endmacro ( ot_pyinstallcheck_test )
 
-ot_pyinstallcheck_test (MyClass_std)
+ot_pyinstallcheck_test (Smolyak_std)
 ot_pyinstallcheck_test (docstring)
 
 add_custom_target ( pyinstallcheck COMMAND ${CMAKE_CTEST_COMMAND} -R "^pyinstallcheck_"

@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief MyClassImplementation
+ *  @brief SmolyakImplementation
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -18,34 +18,34 @@
  *  along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include "ottemplate/MyClassImplementation.hxx"
+#include "otsmolyak/SmolyakImplementation.hxx"
 #include <openturns/PersistentObjectFactory.hxx>
 
 using namespace OT;
 
-namespace OTTEMPLATE
+namespace OTSMOLYAK
 {
 
-CLASSNAMEINIT(MyClassImplementation);
+CLASSNAMEINIT(SmolyakImplementation);
 
-static Factory<MyClassImplementation> Factory_MyClassImplementation;
+static Factory<SmolyakImplementation> Factory_SmolyakImplementation;
 
 
 /* Default constructor */
-MyClassImplementation::MyClassImplementation()
+SmolyakImplementation::SmolyakImplementation()
   : PersistentObject()
 {
   // Nothing to do
 }
 
 /* Virtual constructor method */
-MyClassImplementation * MyClassImplementation::clone() const
+SmolyakImplementation * SmolyakImplementation::clone() const
 {
-  return new MyClassImplementation(*this);
+  return new SmolyakImplementation(*this);
 }
 
 /* example of a func that return a point squared. */
-Point MyClassImplementation::square(Point& p) const
+Point SmolyakImplementation::square(Point& p) const
 {
 
   Point p_out(p.getSize());
@@ -57,24 +57,24 @@ Point MyClassImplementation::square(Point& p) const
 }
 
 /* String converter */
-String MyClassImplementation::__repr__() const
+String SmolyakImplementation::__repr__() const
 {
   OSS oss;
-  oss << "class=" << MyClassImplementation::GetClassName();
+  oss << "class=" << SmolyakImplementation::GetClassName();
   return oss;
 }
 
 /* Method save() stores the object through the StorageManager */
-void MyClassImplementation::save(Advocate & adv) const
+void SmolyakImplementation::save(Advocate & adv) const
 {
   PersistentObject::save( adv );
 }
 
 /* Method load() reloads the object from the StorageManager */
-void MyClassImplementation::load(Advocate & adv)
+void SmolyakImplementation::load(Advocate & adv)
 {
   PersistentObject::load( adv );
 }
 
 
-} /* namespace OTTEMPLATE */
+} /* namespace OTSMOLYAK */

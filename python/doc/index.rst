@@ -1,4 +1,4 @@
-OTTemplate documentation
+OtSmolyak documentation
 ========================
 
 User documentation

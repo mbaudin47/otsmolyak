@@ -2,19 +2,19 @@
 
 ot_add_current_dir_to_include_dirs ()
 
-ot_add_source_file ( MyClass.cxx )
-ot_add_source_file ( MyClassImplementation.cxx )
+ot_add_source_file ( Smolyak.cxx )
+ot_add_source_file ( SmolyakImplementation.cxx )
 
-ot_install_header_file ( MyClass.hxx )
-ot_install_header_file ( MyClassImplementation.hxx )
+ot_install_header_file ( Smolyak.hxx )
+ot_install_header_file ( SmolyakImplementation.hxx )
 
 
 include_directories (${INTERNAL_INCLUDE_DIRS})
 
-add_library (ottemplate ${SOURCEFILES})
-set_target_properties (ottemplate PROPERTIES POSITION_INDEPENDENT_CODE ON)
+add_library (otsmolyak ${SOURCEFILES})
+set_target_properties (otsmolyak PROPERTIES POSITION_INDEPENDENT_CODE ON)
 if (BUILD_SHARED_LIBS)
-  set_target_properties (ottemplate PROPERTIES COMPILE_DEFINITIONS "OTTEMPLATE_DLL_EXPORTS")
+  set_target_properties (otsmolyak PROPERTIES COMPILE_DEFINITIONS "OTSMOLYAK_DLL_EXPORTS")
 endif ()
 
 if ( NOT DEFINED LIB_VERSION ) 
@@ -23,22 +23,22 @@ endif ()
 if ( NOT DEFINED LIB_SOVERSION ) 
   set ( LIB_SOVERSION 0 )
 endif ()
-set_target_properties ( ottemplate PROPERTIES VERSION ${LIB_VERSION} )
-set_target_properties ( ottemplate PROPERTIES SOVERSION ${LIB_SOVERSION} )
-target_link_libraries (ottemplate ${OPENTURNS_LIBRARY})
+set_target_properties ( otsmolyak PROPERTIES VERSION ${LIB_VERSION} )
+set_target_properties ( otsmolyak PROPERTIES SOVERSION ${LIB_SOVERSION} )
+target_link_libraries (otsmolyak ${OPENTURNS_LIBRARY})
 
 # Add targets to the build-tree export set
-export (TARGETS ottemplate FILE ${PROJECT_BINARY_DIR}/OTTemplate-Targets.cmake)
+export (TARGETS otsmolyak FILE ${PROJECT_BINARY_DIR}/OtSmolyak-Targets.cmake)
 
 # Install the export set for use with the install-tree
-install(EXPORT OTTemplate-Targets
-        DESTINATION "${OTTEMPLATE_CONFIG_CMAKE_PATH}"
+install(EXPORT OtSmolyak-Targets
+        DESTINATION "${OTSMOLYAK_CONFIG_CMAKE_PATH}"
         COMPONENT Development)
 
-install(TARGETS ottemplate
-        EXPORT  OTTemplate-Targets 
+install(TARGETS otsmolyak
+        EXPORT  OtSmolyak-Targets 
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION ${OTTEMPLATE_LIBRARY_PATH}
-        ARCHIVE DESTINATION ${OTTEMPLATE_LIBRARY_PATH}
+        LIBRARY DESTINATION ${OTSMOLYAK_LIBRARY_PATH}
+        ARCHIVE DESTINATION ${OTSMOLYAK_LIBRARY_PATH}
 )
 

@@ -1,6 +1,6 @@
 //                                               -*- C++ -*-
 /**
- *  @brief The external header file of OTTemplate
+ *  @brief The external header file of OtSmolyak
  *
  *  Copyright 2005-2019 Airbus-EDF-IMACS-ONERA-Phimeca
  *
@@ -19,11 +19,11 @@
  *
  */
 
-#ifndef OTTEMPLATE_OTTEMPLATE_HXX
-#define OTTEMPLATE_OTTEMPLATE_HXX
+#ifndef OTSMOLYAK_OTSMOLYAK_HXX
+#define OTSMOLYAK_OTSMOLYAK_HXX
 
-#include "ottemplate/MyClassImplementation.hxx"
-#include "ottemplate/MyClass.hxx"
+#include "otsmolyak/SmolyakImplementation.hxx"
+#include "otsmolyak/Smolyak.hxx"
 
-#endif // OTTEMPLATE_OTTEMPLATE_HXX
+#endif // OTSMOLYAK_OTSMOLYAK_HXX
 

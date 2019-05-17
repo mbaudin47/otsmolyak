@@ -1,21 +1,21 @@
-%define OTTEMPLATE_MyClass_doc
-"MyClass class.
+%define OTSMOLYAK_Smolyak_doc
+"Smolyak class.
 
 Examples
 --------
->>> import ottemplate
->>> a = ottemplate.MyClass()
+>>> import otsmolyak
+>>> a = otsmolyak.Smolyak()
 
 Notes
 -----
 Template module class."
 %enddef
-%feature("docstring") OTTEMPLATE::MyClassImplementation
-OTTEMPLATE_MyClass_doc
+%feature("docstring") OTSMOLYAK::SmolyakImplementation
+OTSMOLYAK_Smolyak_doc
 
 // ---------------------------------------------------------------------
 
-%define OTTEMPLATE_MyClass_square_doc
+%define OTSMOLYAK_Smolyak_square_doc
 "Square of a point.
 
 Parameters
@@ -31,13 +31,13 @@ square : :py:class:`openturns.Point`
 Examples
 --------
 >>> import openturns as ot
->>> import ottemplate
->>> a = ottemplate.MyClass()
+>>> import otsmolyak
+>>> a = otsmolyak.Smolyak()
 >>> point = ot.Point([1.0, 2.0, 3.0])
 >>> a.square(point)
 class=Point name=Unnamed dimension=3 values=[1,4,9]"
 %enddef
-%feature("docstring") OTTEMPLATE::MyClassImplementation::square
-OTTEMPLATE_MyClass_square_doc
+%feature("docstring") OTSMOLYAK::SmolyakImplementation::square
+OTSMOLYAK_Smolyak_square_doc
 
 
