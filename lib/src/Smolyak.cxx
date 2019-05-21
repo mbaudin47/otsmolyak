@@ -21,7 +21,7 @@
 
 #include "otsmolyak/smolpack.hh"
 #include "otsmolyak/Smolyak.hxx"
-#include <openturns/PersistentObjectFactory.hxx>
+#include <openturns/OT.hxx>
 
 using namespace OT;
 
@@ -33,7 +33,7 @@ CLASSNAMEINIT(Smolyak);
 /* Default constructor */
 Smolyak::Smolyak():
   IntegrationAlgorithmImplementation()
-  , cubatureParameter_(0)
+  , cubatureParameter_(1)
 {
   // Nothing to do
 }
@@ -80,10 +80,41 @@ Point Smolyak::integrate(const Function & function,
                          const Interval & interval) const
 {
   const UnsignedInteger inputDimension = function.getInputDimension();
+  // Create a multidimensionnal Uniform distribution according to the interval
+  Point lower = interval.getLowerBound();
+  Point upper = interval.getUpperBound();
+  ComposedDistribution::DistributionCollection aCollection;
+  for (UnsignedInteger i = 0; i < inputDimension; i++)
+  {
+    Uniform marginal(lower[i], upper[i]);
+    aCollection.add( Distribution(marginal) );
+  }
+  Distribution uniformInterval = ComposedDistribution(aCollection);
+  // Create a multidimensionnal Uniform distribution in [0,1]^dim
+  ComposedDistribution::DistributionCollection aCollection2;
+  for (UnsignedInteger i = 0; i < inputDimension; i++)
+  {
+    Uniform marginal(0., 1.);
+    aCollection2.add( Distribution(marginal) );
+  }
+  Distribution uniformUnit = ComposedDistribution(aCollection2);
+  // Create a transformation so that [a,b] maps to [0,1]^dim
+  const DistributionTransformation transformation(uniformUnit, uniformInterval);
+  // Create a composed function which takes its inputs in [0,1]^dim
+  Function composedModel = ComposedFunction(function, transformation);
+  // const DistributionTransformation transformation(distribution_, measure);
+  if (inputDimension - cubatureParameter_ <= 0)
+    throw InvalidArgumentException(HERE) << "Cubature parameter = " << cubatureParameter_ << " is not greater than dimension = " << inputDimension;
   const UnsignedInteger outputDimension = function.getOutputDimension();
-  const UnsignedInteger print_stats = 0; // Do not print outputs
+  const UnsignedInteger print_stats = 0; // Print outputs
+  // Get the interval volume
+  double volume = interval.getVolume();
+  // Compute the raw integral
   Point result(outputDimension);
-  result[0] = OTSMOLPACK::int_smolyak(inputDimension, cubatureParameter_, Smolyak::ComputeFunction, print_stats, (void*) function)
+  result[0] = int_smolyak(inputDimension, cubatureParameter_, Smolyak::ComputeFunction, print_stats, (void*) & composedModel);
+  // Adjust the integral depending on the volume
+  // This is necessary, because of the change of variable
+  result[0]*=volume;
   return result;
 }
 
@@ -103,6 +134,11 @@ double Smolyak::ComputeFunction(int inputDimension,
   Function *function = static_cast<Function *>(state);
   Point outPoint(function->operator()(inPoint));
   
+  // TODO : take into account for output dimension
+  /* Possible way: create an internal class containing the function to integrate 
+  and the current dimension to be integrated. 
+  Within a loop over the output dimensions, 
+  transmit this object to the algorithm. */
   double returnValue = outPoint[0];
 
   return returnValue;

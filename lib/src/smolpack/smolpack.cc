@@ -14,13 +14,13 @@ double dnu[fn][uniw];   /* Delta-parameter             */
 double ftotal;
 double wsum;
 double summe;
-int d;
+int d; /* Dimension */
 int q;                             /* cubature formula parameter  */
 int n[fn];
 int ninv[fn];
 int sw[gesfn];       /* working var's */
-int count;
-int wcount;       /* counter of f-calls and coefficient calls */
+int count;        /* counter of f-calls */
+int wcount;       /* counter of coefficient calls */
 
 int indices[maxdim];
 int argind[maxdim]; /* formula and nodal indices    */
@@ -105,6 +105,12 @@ double int_smolyak ( int dim, int qq, double (*ff) ( int, double *xx, void *stat
     Output, double INT_SMOLYAK, the approximated value of the integral.
 */
 {
+  if ( print_stats )
+  {
+    printf ( "  int_smolyak\n" );
+    printf ( "      dim =  %d\n", dim );
+    printf ( "      qq =  %d\n", qq );
+  }
 /* 
   Make the parameters global.
 */
@@ -115,6 +121,10 @@ double int_smolyak ( int dim, int qq, double (*ff) ( int, double *xx, void *stat
 /* 
   Initialize.
 */
+  if ( print_stats )
+  {
+    printf ( "  Initialize.\n" );
+  }
   wcount = 0;
   count = 0;
   quafo = 0.0; 
@@ -123,10 +133,18 @@ double int_smolyak ( int dim, int qq, double (*ff) ( int, double *xx, void *stat
 /* 
   Call the Smolyak algorithm.  Q-DIM = K, the number of stages.
 */
+  if ( print_stats )
+  {
+    printf ( "  Call the Smolyak algorithm.\n" );
+  }
   formula ( 1, q-dim );
 /* 
   Free the allocated memory.
 */
+  if ( print_stats )
+  {
+    printf ( "  Free the allocated memory.\n" );
+  }
   frei ( root );
 /* 
   Print statistics, if desired.
@@ -764,6 +782,8 @@ double fsum ( int k )
 */
 {
   double dummy;
+  double y;
+  int verbose = 0;
 
   if ( k == 0 )
   {
@@ -772,7 +792,21 @@ double fsum ( int k )
   }
   else if ( k == d + 1 )
   {
-    ftotal = ftotal + (*f) ( d, x, function_state );
+    if (verbose)
+    {
+      printf ( "  Calling f...\n");
+      for ( int i = 0; i < d; i++ )
+      {
+        printf ( "  x[%d] = %f\n", i, x[i] );
+      }
+    }
+    y = (*f) ( d, x, function_state );
+    ftotal = ftotal + y;
+    if (verbose)
+    {
+      printf ( "  y =  %f\n", y );
+    }
+    count++;
   }
   else
   {

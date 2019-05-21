@@ -1,3 +1,4 @@
-Smolyak(cubatureParameter=0)
-Computed value=0
-Reference value=-0.590348
+Smolyak(cubatureParameter=10)
+Computed value=0.45548
+Reference value=0.45548
+value=[16], calls=399
